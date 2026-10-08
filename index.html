@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0B1724" />
+  <meta name="description" content="Infra9 — arquitetura de resiliência e continuidade digital para situações de crise." />
+  <title>Infra9 — Arquitetura Técnica</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Infra9 - início">
+      <span class="brand-mark">I9</span>
+      <span class="brand-copy">
+        <strong>INFRA9</strong>
+        <small>ODS 9 · Resiliência digital</small>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#visao">Visão geral</a>
+      <a href="#frente1">Frente 1</a>
+      <a href="#frente2">Frente 2</a>
+      <a href="#frente3">Frente 3</a>
+      <a href="#seguranca">Segurança</a>
+    </nav>
+
+    <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="hero section-pad">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow"><span></span> COMO O INFRA9 FUNCIONA POR DENTRO</div>
+          <h1>Continuar operando<br />quando a infraestrutura<br /><em>é pressionada.</em></h1>
+          <p class="lead">
+            O Infra9 combina resiliência de sistemas, continuidade regional e inclusão econômica em uma única arquitetura para cenários de crise.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="start-sim">Simular uma crise</button>
+            <a class="btn btn-ghost" href="#arquitetura">Explorar arquitetura</a>
+          </div>
+          <div class="hero-slogan">
+            <span>O sistema aguenta.</span>
+            <span>A população acessa.</span>
+            <span>O comércio continua.</span>
+          </div>
+        </div>
+
+        <div class="hero-panel reveal delay-1" aria-label="Painel operacional ilustrativo">
+          <div class="panel-head">
+            <div>
+              <span class="kicker">CENTRAL DE OPERAÇÕES</span>
+              <strong id="scenario-label">Operação normal</strong>
+            </div>
+            <span class="status-pill status-normal" id="global-status">NORMAL</span>
+          </div>
+
+          <div class="metrics-grid">
+            <article class="metric">
+              <span>Tráfego</span>
+              <strong id="metric-traffic">42%</strong>
+              <small>da capacidade base</small>
+            </article>
+            <article class="metric">
+              <span>Servidores</span>
+              <strong id="metric-servers">2</strong>
+              <small>instâncias ativas</small>
+            </article>
+            <article class="metric">
+              <span>Fila</span>
+              <strong id="metric-queue">0</strong>
+              <small>usuários aguardando</small>
+            </article>
+            <article class="metric">
+              <span>ICR</span>
+              <strong id="metric-icr">84</strong>
+              <small>conectividade regional</small>
+            </article>
+          </div>
+
+          <div class="mini-chart" aria-label="Indicador visual de carga">
+            <div class="chart-line" id="chart-line"></div>
+            <div class="chart-base"></div>
+          </div>
+
+          <div class="scenario-footer">
+            <div>
+              <span>EdgeBox</span>
+              <strong id="edge-state">Sincronizado</strong>
+            </div>
+            <div>
+              <span>Pedidos locais</span>
+              <strong id="local-orders">0 pendentes</strong>
+            </div>
+            <div>
+              <span>Serviços essenciais</span>
+              <strong id="essential-state">Capacidade preservada</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="simulation-strip reveal delay-2" id="simulation-strip" aria-live="polite">
+        <button class="sim-step active" data-step="0"><span>01</span> Normal</button>
+        <div class="sim-line"></div>
+        <button class="sim-step" data-step="1"><span>02</span> Pico</button>
+        <div class="sim-line"></div>
+        <button class="sim-step" data-step="2"><span>03</span> Queda regional</button>
+        <div class="sim-line"></div>
+        <button class="sim-step" data-step="3"><span>04</span> Recuperação</button>
+      </div>
+    </section>
+
+    <section class="context-strip" aria-label="Contexto do desafio">
+      <div><strong>+80%</strong><span>tráfego em 3 semanas</span></div>
+      <div><strong>12%</strong><span>serviços essenciais indisponíveis no pico</span></div>
+      <div><strong>40%</strong><span>bairros periféricos com conectividade insuficiente</span></div>
+      <div><strong>1 em 4</strong><span>pequenos negócios sem presença digital</span></div>
+    </section>
+
+    <section class="section-pad" id="visao">
+      <div class="section-heading reveal">
+        <div class="eyebrow"><span></span> VISÃO GERAL</div>
+        <h2>Três problemas.<br /><em>Uma arquitetura.</em></h2>
+        <p>O Infra9 não cria três produtos isolados. As três frentes compartilham infraestrutura, monitoramento, contingência e regras de prioridade.</p>
+      </div>
+
+      <div class="three-fronts">
+        <article class="front-card reveal">
+          <div class="front-num">01</div>
+          <div class="front-icon icon-server" aria-hidden="true"></div>
+          <h3>O sistema aguenta.</h3>
+          <p>Absorve picos, organiza acesso, protege serviços críticos e aumenta capacidade sob demanda.</p>
+          <a href="#frente1">Ver arquitetura <span>→</span></a>
+        </article>
+        <article class="front-card reveal delay-1">
+          <div class="front-num">02</div>
+          <div class="front-icon icon-network" aria-hidden="true"></div>
+          <h3>A população acessa.</h3>
+          <p>Detecta degradação, cria contingência regional e mantém funções selecionadas disponíveis localmente.</p>
+          <a href="#frente2">Ver contingência <span>→</span></a>
+        </article>
+        <article class="front-card reveal delay-2">
+          <div class="front-num">03</div>
+          <div class="front-icon icon-store" aria-hidden="true"></div>
+          <h3>O comércio continua.</h3>
+          <p>Digitaliza pequenos negócios com catálogo, pedidos e operação leve, aproveitando a mesma infraestrutura resiliente.</p>
+          <a href="#frente3">Ver operação <span>→</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-pad architecture-section" id="arquitetura">
+      <div class="section-heading reveal">
+        <div class="eyebrow"><span></span> ARQUITETURA INTEGRADA</div>
+        <h2>Do acesso ao dado,<br /><em>sem ponto único de colapso.</em></h2>
+        <p>Visão conceitual da jornada de uma requisição durante operação normal, pico ou contingência.</p>
+      </div>
+
+      <div class="architecture-shell reveal">
+        <div class="arch-row arch-main">
+          <div class="arch-node accent"><small>Entrada</small><strong>Controle de tráfego</strong><span>Rate limit + filtros</span></div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node"><small>Absorção</small><strong>Cache / CDN</strong><span>Conteúdo repetido</span></div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node"><small>Organização</small><strong>Fila virtual</strong><span>Transparência + prioridade</span></div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node"><small>Distribuição</small><strong>Balanceamento</strong><span>Saúde das instâncias</span></div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node"><small>Processamento</small><strong>Servidores elásticos</strong><span>Escala horizontal</span></div>
+          <div class="arch-arrow">→</div>
+          <div class="arch-node"><small>Persistência</small><strong>Dados + réplicas</strong><span>Redundância</span></div>
+        </div>
+
+        <div class="arch-bridge">
+          <span></span><strong>Monitoramento, regras de prioridade, segurança e observabilidade atravessam toda a arquitetura</strong><span></span>
+        </div>
+
+        <div class="arch-row edge-row">
+          <div class="edgebox-visual">
+            <div class="edgebox-led"></div>
+            <div>
+              <small>NÓ REGIONAL</small>
+              <strong>EdgeBox Infra9</strong>
+            </div>
+          </div>
+          <div class="edge-features">
+            <span>cache local</span><span>aplicação local</span><span>fila de sincronização</span><span>armazenamento temporário</span><span>telemetria</span>
+          </div>
+          <div class="sync-flow">
+            <span>sem internet</span>
+            <strong>GUARDA AGORA</strong>
+            <div class="sync-arrow">⇄</div>
+            <strong>ENVIA DEPOIS</strong>
+            <span>conexão retorna</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad split-section" id="frente1">
+      <div class="split-copy reveal">
+        <div class="eyebrow"><span></span> FRENTE 1 · RESILIÊNCIA CENTRAL</div>
+        <h2>O sistema<br /><em>aguenta o pico.</em></h2>
+        <p class="lead-sm">A proposta mantém os sistemas existentes e adiciona uma camada de proteção, distribuição e elasticidade na frente deles.</p>
+
+        <div class="tech-list">
+          <div class="tech-item"><span>01</span><div><strong>Controle de entrada</strong><p>Rate limit por sessão/credencial, IP como sinal complementar e análise de origem e risco.</p></div></div>
+          <div class="tech-item"><span>02</span><div><strong>Cache e distribuição</strong><p>Conteúdo repetido é respondido sem consumir a aplicação principal.</p></div></div>
+          <div class="tech-item"><span>03</span><div><strong>Fila virtual</strong><p>Ordem de chegada, posição, estimativa de espera e prioridade por tipo de serviço.</p></div></div>
+          <div class="tech-item"><span>04</span><div><strong>Escala horizontal</strong><p>Novas instâncias entram no pico e são reduzidas quando a demanda normaliza.</p></div></div>
+          <div class="tech-item"><span>05</span><div><strong>Redundância e modo degradado</strong><p>Falhas reduzem funcionalidades, mas não derrubam o serviço essencial inteiro.</p></div></div>
+        </div>
+      </div>
+
+      <div class="tech-demo reveal delay-1">
+        <div class="demo-head"><span>EXEMPLO DE AUTOSCALING</span><strong>Demanda → capacidade</strong></div>
+        <div class="server-stage">
+          <div class="server-load">
+            <div><span>TRÁFEGO</span><strong>180%</strong></div>
+            <div class="load-bar"><i style="width:88%"></i></div>
+          </div>
+          <div class="servers" aria-label="Seis servidores ativos">
+            <i class="server active"></i><i class="server active"></i><i class="server burst"></i><i class="server burst"></i><i class="server burst"></i><i class="server burst"></i>
+          </div>
+          <div class="server-caption"><span>base: 2</span><strong>6 ativos no pico</strong><span>redução automática depois</span></div>
+        </div>
+        <div class="priority-band">
+          <div><small>CAPACIDADE RESERVADA</small><strong>Saúde</strong></div>
+          <div><small>CAPACIDADE RESERVADA</small><strong>Segurança</strong></div>
+        </div>
+        <div class="callout"><span>Princípio</span><strong>Um pico em assistência social não deve impedir um serviço crítico de saúde.</strong></div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="frente2">
+      <div class="section-heading reveal">
+        <div class="eyebrow"><span></span> FRENTE 2 · INFRA9 CONECTA</div>
+        <h2>Se a conexão cair,<br /><em>a operação não precisa parar.</em></h2>
+        <p>O Infra9 combina monitoramento regional, contingência local e sincronização segura para reduzir a dependência de uma conexão externa contínua.</p>
+      </div>
+
+      <div class="icr-layout">
+        <div class="icr-card reveal">
+          <div class="icr-title"><span>ICR</span><div><strong>Índice de Conectividade Regional</strong><small>Termômetro conceitual da região</small></div></div>
+          <div class="icr-scale">
+            <div class="icr-point green"><strong>82</strong><span>Normal</span></div>
+            <div class="icr-track"></div>
+            <div class="icr-point yellow"><strong>61</strong><span>Atenção</span></div>
+            <div class="icr-track"></div>
+            <div class="icr-point orange"><strong>38</strong><span>Degradação</span></div>
+            <div class="icr-track"></div>
+            <div class="icr-point red"><strong>19</strong><span>Crítico</span></div>
+          </div>
+          <div class="icr-source">
+            <span>Medição automática</span><span>Saúde dos pontos locais</span><span>Relatos agregados</span>
+          </div>
+          <p class="micro-note">O ICR é um indicador proposto para o projeto. Pesos e limiares seriam calibrados em implantação real.</p>
+        </div>
+
+        <div class="state-machine reveal delay-1">
+          <div class="state-head"><span>ESTADOS DO EDGEBOX</span><strong>Contingência progressiva</strong></div>
+          <div class="state-list">
+            <div class="state normal"><span>01</span><div><strong>Normal</strong><small>sincronização ativa</small></div></div>
+            <div class="state attention"><span>02</span><div><strong>Atenção</strong><small>cache atualizado + link reserva testado</small></div></div>
+            <div class="state contingency"><span>03</span><div><strong>Contingência</strong><small>link alternativo assume</small></div></div>
+            <div class="state isolated"><span>04</span><div><strong>Isolado</strong><small>serviços locais + fila local</small></div></div>
+            <div class="state recovery"><span>05</span><div><strong>Recuperação</strong><small>sincronização gradual</small></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="offline-flow reveal">
+        <div class="flow-person"><div class="avatar">B</div><strong>Beatriz</strong><span>posto de saúde</span></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><small>SEM INTERNET EXTERNA</small><strong>Wi-Fi local</strong></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box accent"><small>EDGEBOX</small><strong>registro local</strong></div>
+        <div class="flow-arrow dashed">→</div>
+        <div class="flow-box"><small>CONEXÃO VOLTA</small><strong>sincronização</strong></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box"><small>CENTRAL</small><strong>registro validado</strong></div>
+      </div>
+
+      <div class="technical-notes reveal">
+        <div><strong>Idempotência</strong><span>cada operação recebe um identificador para evitar processamento duplicado.</span></div>
+        <div><strong>Controle de versão</strong><span>conflitos entre dado local e central podem ser detectados antes da consolidação.</span></div>
+        <div><strong>Sincronização gradual</strong><span>o retorno da conexão não dispara tudo ao mesmo tempo e recria um pico.</span></div>
+        <div><strong>Modo Lite</strong><span>interface reduz mídia e elementos pesados quando a conexão está degradada.</span></div>
+      </div>
+    </section>
+
+    <section class="section-pad commerce-section" id="frente3">
+      <div class="section-heading reveal">
+        <div class="eyebrow"><span></span> FRENTE 3 · INFRA9 NEGÓCIOS</div>
+        <h2>Digitalizar sem exigir<br /><em>uma equipe de TI.</em></h2>
+        <p>O comerciante informa o que já conhece — produtos, preços, retirada e entrega — e a plataforma transforma isso em uma presença digital simples e resiliente.</p>
+      </div>
+
+      <div class="commerce-grid">
+        <div class="merchant-panel reveal">
+          <div class="merchant-head"><span>PAINEL DO NEGÓCIO</span><strong>Padaria do Jorge</strong><small>Conectividade: instável · Modo Lite disponível</small></div>
+          <div class="merchant-kpis"><div><strong>18</strong><span>pedidos hoje</span></div><div><strong>3</strong><span>novos</span></div><div><strong>4</strong><span>em preparo</span></div></div>
+          <div class="orders">
+            <div class="order"><span>#142</span><strong>Novo</strong><small>2 pães · 1 leite</small></div>
+            <div class="order"><span>#143</span><strong>Em preparo</strong><small>1 bolo</small></div>
+            <div class="order"><span>#144</span><strong>Pronto</strong><small>1 cesta básica</small></div>
+          </div>
+        </div>
+
+        <div class="local-commerce reveal delay-1">
+          <div class="local-title"><small>SEM INTERNET EXTERNA</small><strong>Comércio local ainda visível</strong></div>
+          <div class="local-map">
+            <div class="map-grid"></div>
+            <span class="map-node n1">Padaria</span><span class="map-node n2">Mercado</span><span class="map-node n3">Farmácia</span><span class="map-node n4 edge">EdgeBox</span>
+          </div>
+          <p>Catálogos e pedidos locais podem ser mantidos na infraestrutura regional, respeitando o limite de funções que não dependem de serviços externos.</p>
+        </div>
+      </div>
+
+      <div class="boundary-note reveal">
+        <strong>Limite técnico importante:</strong>
+        <span>o Infra9 pode exibir dados de pagamento e registrar pedidos localmente, mas confirmações bancárias e integrações externas continuam dependendo da rede das instituições envolvidas.</span>
+      </div>
+    </section>
+
+    <section class="section-pad security-section" id="seguranca">
+      <div class="section-heading reveal">
+        <div class="eyebrow"><span></span> SEGURANÇA, PRIVACIDADE E CONTROLE</div>
+        <h2>Disponibilidade não pode<br /><em>reduzir proteção.</em></h2>
+        <p>A contingência é projetada com minimização de dados, autenticação dos nós locais e sincronização controlada.</p>
+      </div>
+
+      <div class="security-grid">
+        <article class="security-card reveal"><span>01</span><strong>Prioridade por serviço</strong><p>Saúde e segurança recebem capacidade pelo tipo de serviço — não por coleta de condição sensível do cidadão.</p></article>
+        <article class="security-card reveal delay-1"><span>02</span><strong>Dados mínimos e temporários</strong><p>O EdgeBox mantém apenas o necessário para a contingência e pelo tempo definido em política.</p></article>
+        <article class="security-card reveal delay-2"><span>03</span><strong>Comunicação protegida</strong><p>Sincronização por canal criptografado e identidade própria para cada equipamento regional.</p></article>
+        <article class="security-card reveal"><span>04</span><strong>Controle de acesso</strong><p>Perfis e permissões limitam quais usuários podem visualizar ou alterar funções administrativas.</p></article>
+        <article class="security-card reveal delay-1"><span>05</span><strong>Operações identificadas</strong><p>Chaves únicas reduzem risco de duplicidade após falhas e reenvios.</p></article>
+        <article class="security-card reveal delay-2"><span>06</span><strong>Observabilidade</strong><p>Logs, métricas e alertas ajudam a detectar degradação, abuso e falhas antes do colapso.</p></article>
+      </div>
+    </section>
+
+    <section class="section-pad implementation-section" id="implantacao">
+      <div class="section-heading reveal">
+        <div class="eyebrow"><span></span> IMPLANTAÇÃO E SUSTENTABILIDADE</div>
+        <h2>Começar crítico.<br /><em>Expandir com segurança.</em></h2>
+      </div>
+
+      <div class="phase-line reveal">
+        <div class="phase"><span>01</span><strong>Serviços essenciais</strong><small>saúde, segurança e serviços críticos</small></div>
+        <div class="phase-arrow">→</div>
+        <div class="phase"><span>02</span><strong>Regiões vulneráveis</strong><small>maior risco de isolamento digital</small></div>
+        <div class="phase-arrow">→</div>
+        <div class="phase"><span>03</span><strong>Pequenos negócios</strong><small>digitalização simplificada</small></div>
+        <div class="phase-arrow">→</div>
+        <div class="phase"><span>04</span><strong>Expansão</strong><small>novos serviços e localidades</small></div>
+      </div>
+
+      <div class="sustain-grid">
+        <div class="sustain reveal"><span>ECONÔMICO</span><strong>Capacidade sob demanda</strong><p>Reutiliza sistemas existentes e ativa capacidade adicional somente quando necessária.</p></div>
+        <div class="sustain reveal delay-1"><span>AMBIENTAL</span><strong>Menos ociosidade</strong><p>Cache reduz processamento repetido e elasticidade evita manter recursos excedentes permanentemente ligados.</p></div>
+        <div class="sustain reveal delay-2"><span>SOCIAL</span><strong>Infraestrutura compartilhada</strong><p>Conectividade, páginas leves e digitalização reduzem barreiras para cidadãos e pequenos negócios.</p></div>
+      </div>
+    </section>
+
+    <section class="section-pad faq-section" id="faq">
+      <div class="section-heading reveal">
+        <div class="eyebrow"><span></span> PERGUNTAS TÉCNICAS</div>
+        <h2>O que normalmente<br /><em>a banca perguntaria.</em></h2>
+      </div>
+
+      <div class="faq-list reveal">
+        <details><summary>O Infra9 funciona sem internet?</summary><p>Não substitui a internet. Quando a conexão externa cai, apenas funções previamente preparadas continuam disponíveis localmente por meio do EdgeBox e/ou da aplicação offline. O restante permanece indisponível até a conectividade retornar.</p></details>
+        <details><summary>O Infra9 prevê que a internet vai cair?</summary><p>Não. O ICR identifica sinais de degradação e permite preparar contingência antecipadamente. Isso reduz tempo de reação, mas não representa uma previsão infalível.</p></details>
+        <details><summary>Por que não reconstruir todos os sistemas em microserviços?</summary><p>Porque a proposta prioriza viabilidade e tempo de implantação. O Infra9 adiciona resiliência na frente dos sistemas existentes e permite modernização gradual, sem depender de uma reescrita total para gerar valor.</p></details>
+        <details><summary>Como evitar registros duplicados quando a conexão volta?</summary><p>Cada operação recebe uma chave de idempotência. Ao sincronizar, a central verifica se aquela operação já foi processada antes de criar um novo registro.</p></details>
+        <details><summary>Qual a função do EdgeBox?</summary><p>Atuar como ponto regional de contingência: manter conteúdo selecionado em cache, servir aplicações locais, armazenar operações temporárias e sincronizar com a central quando a conexão externa voltar.</p></details>
+        <details><summary>O comércio consegue receber Pix sem internet?</summary><p>O Infra9 pode manter catálogo e pedido locais e até exibir dados de pagamento previamente disponíveis. Porém a confirmação e a liquidação de um Pix dependem da infraestrutura bancária e de conectividade correspondente.</p></details>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="closing-inner reveal">
+        <div class="brand big"><span class="brand-mark">I9</span><span class="brand-copy"><strong>INFRA9</strong><small>ODS 9 · Resiliência digital</small></span></div>
+        <h2>O sistema aguenta.<br />A população acessa.<br /><em>O comércio continua.</em></h2>
+        <p>Quando tudo depende do digital, a infraestrutura não pode ser o próximo ponto de colapso.</p>
+        <a class="btn btn-primary" href="#top">Voltar ao início</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Infra9 · Jornada Acadêmica · ODS 9</span>
+    <span>Microsite técnico · proposta conceitual acadêmica</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
