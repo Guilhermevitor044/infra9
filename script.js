@@ -7,22 +7,22 @@
     {
       key: 'normal', label: 'Operação normal', status: 'NORMAL', statusClass: 'status-normal',
       event: 'Serviços funcionando normalmente.', traffic: '42%', servers: '2', queue: '0', icr: '84', edge: 'Sincronizado', orders: '0 pendentes', essential: 'Capacidade preservada',
-      explanation: 'A capacidade estável atende a demanda e o EdgeBox permanece sincronizado.'
+      explanation: 'A capacidade estável atende a demanda e o EdgeBox permanece sincronizado.', announcement: 'Operação normal. Serviços funcionando normalmente. Capacidade estável e EdgeBox sincronizado.'
     },
     {
       key: 'peak', label: 'Pico de demanda', status: 'PICO CONTROLADO', statusClass: 'status-warn',
       event: 'Cadastro do auxílio emergencial é liberado.', traffic: '180%', servers: '6', queue: '21.482', icr: '72', edge: 'Em atenção', orders: '0 pendentes', essential: 'Faixa reservada ativa',
-      explanation: 'Novos servidores entram, a fila organiza o acesso e a capacidade essencial permanece reservada.'
+      explanation: 'Novos servidores entram, a fila organiza o acesso e a capacidade essencial permanece reservada.', announcement: 'Pico de demanda. Cadastro do auxílio emergencial liberado. Capacidade aumentada e fila virtual ativada.'
     },
     {
       key: 'outage', label: 'Queda regional', status: 'CONTINGÊNCIA', statusClass: 'status-critical',
       event: 'Uma região perde conectividade externa.', traffic: '138%', servers: '5', queue: '8.940', icr: '22', edge: 'Modo isolado', orders: '14 pendentes', essential: 'Operação local ativa',
-      explanation: 'A central continua operando; o EdgeBox oferece funções locais e guarda operações na fila regional.'
+      explanation: 'A central continua operando; o EdgeBox oferece funções locais e guarda operações na fila regional.', announcement: 'Queda regional. Uma região perde conectividade externa. EdgeBox isolado mantém funções locais e fila regional.'
     },
     {
       key: 'recovery', label: 'Recuperação', status: 'SINCRONIZANDO', statusClass: 'status-recovery',
       event: 'Conectividade é restabelecida.', traffic: '96%', servers: '4', queue: '1.280', icr: '58', edge: 'Sincronização gradual', orders: '3 pendentes', essential: 'Prioridade na recuperação',
-      explanation: 'A conexão volta em lotes: essenciais primeiro, duplicidades controladas e retorno progressivo.'
+      explanation: 'A conexão volta em lotes: essenciais primeiro, duplicidades controladas e retorno progressivo.', announcement: 'Recuperação. Conectividade restabelecida. Sincronização gradual prioriza essenciais e controla duplicidades.'
     }
   ];
 
@@ -32,6 +32,7 @@
   const globalStatus = $('#global-status');
   const scenarioEvent = $('#scenario-event');
   const scenarioExplanation = $('#scenario-explanation');
+  const scenarioLive = $('#scenario-live');
   const traffic = $('#metric-traffic');
   const servers = $('#metric-servers');
   const queue = $('#metric-queue');
@@ -44,6 +45,7 @@
   const reset = $('#reset-sim');
   const steps = [...document.querySelectorAll('.sim-step')];
   let timer = null;
+  let lastAnnouncedScenario = '';
 
   function stopSimulation() {
     if (timer) window.clearInterval(timer);
@@ -60,6 +62,10 @@
     globalStatus.className = `status-pill ${scenario.statusClass}`;
     scenarioEvent.textContent = scenario.event;
     scenarioExplanation.textContent = scenario.explanation;
+    if (scenarioLive && scenario.key !== lastAnnouncedScenario) {
+      scenarioLive.textContent = scenario.announcement;
+      lastAnnouncedScenario = scenario.key;
+    }
     traffic.textContent = scenario.traffic;
     servers.textContent = scenario.servers;
     queue.textContent = scenario.queue;
@@ -112,15 +118,33 @@
     isolated: 'Sem internet externa, Wi-Fi local, serviços selecionados e fila local continuam disponíveis.',
     recovery: 'A conectividade voltou; lotes graduais, validação e prioridade evitam um novo pico.'
   };
-  const stateDetail = $('#state-detail');
-  document.querySelectorAll('.state').forEach((state) => {
-    state.addEventListener('click', () => {
-      document.querySelectorAll('.state').forEach((item) => {
-        const active = item === state;
-        item.classList.toggle('active', active);
-        item.setAttribute('aria-selected', String(active));
-      });
-      if (stateDetail) stateDetail.textContent = stateDescriptions[state.dataset.state] || '';
+  const stateDetail = $('#edgebox-panel');
+  const stateTabs = [...document.querySelectorAll('.state')];
+  function activateState(state, moveFocus = false) {
+    stateTabs.forEach((item) => {
+      const active = item === state;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-selected', String(active));
+    });
+    if (stateDetail) {
+      stateDetail.textContent = stateDescriptions[state.dataset.state] || '';
+      stateDetail.setAttribute('aria-labelledby', state.id);
+    }
+    if (moveFocus) state.focus();
+  }
+  stateTabs.forEach((state) => {
+    state.addEventListener('click', () => activateState(state));
+    state.addEventListener('keydown', (event) => {
+      const currentIndex = stateTabs.indexOf(state);
+      let nextIndex = currentIndex;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (currentIndex + 1) % stateTabs.length;
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (currentIndex - 1 + stateTabs.length) % stateTabs.length;
+      if (event.key === 'Home') nextIndex = 0;
+      if (event.key === 'End') nextIndex = stateTabs.length - 1;
+      if (nextIndex !== currentIndex) {
+        event.preventDefault();
+        activateState(stateTabs[nextIndex], true);
+      }
     });
   });
 
